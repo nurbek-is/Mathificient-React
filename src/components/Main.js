@@ -2,7 +2,7 @@ import React from 'react'
 import SelectInput from './SelectInput';
 import PlayButton from './PlayButton'
 
-function Main () {
+function Main (props) {
     const operations = ['+', '-', 'x', '/'];
     const numbers = [];
     for (let number=2; number <= 100; number++) {
@@ -10,8 +10,10 @@ function Main () {
       }
     return (
         <main>
-            <SelectInput label='Operation' id='operation' values={operations} />
-            <SelectInput label="Maximum Number" id="max-number" values={numbers}/>
+            <SelectInput    label='Operation' id='operation' currentValue={props.operation} 
+                            setCurrentValue = {props.setOperation} values={operations} />
+            <SelectInput    label="Maximum Number" id="max-number"currentValue={props.maxNumber}
+                            setCurrentValue={props.setMaxNumber}  values={numbers} />
             <PlayButton />
         </main>
     )
