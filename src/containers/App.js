@@ -4,6 +4,9 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Main from '../components/Main';
 import Game from '../components/Game';
+import {Route} from 'react-router-dom';
+
+
 
 function App() {
   const [operation,setOperation]=useState('+');
@@ -11,10 +14,17 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <h1>Mathificent</h1>
-      <Main operation={operation} setOperation = {setOperation} maxNumber = {maxNumber} 
-      setMaxNumber = {setMaxNumber}/><br />
-      <Game operation = {operation} maxNumber={maxNumber} />
+    
+      <Route exact path='/' component = {()=>
+      <Main operation={operation}
+          setOperation={setOperation}
+          maxNumber={maxNumber}
+          setMaxNumber={setMaxNumber} />} />
+
+      <Route path="/play" 
+        component={()=>
+        <Game operation={operation}
+          maxNumber={maxNumber}/>}/>
       <Footer />
     </div>
   );

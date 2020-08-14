@@ -1,9 +1,11 @@
 import React, {Fragment} from 'react'
+import {Link} from 'react-router-dom';
+
 function PlayButton() {
     return (
        <fragment>
         <br></br>
-        <button>Play</button>
+        <Link className="btn btn-primary" to="/play">Play!</Link>
         </fragment>
     )
 }

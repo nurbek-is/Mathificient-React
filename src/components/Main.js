@@ -10,6 +10,7 @@ function Main (props) {
       }
     return (
         <main>
+            <h1>Mathificent</h1>
             <SelectInput    label='Operation' id='operation' currentValue={props.operation} 
                             setCurrentValue = {props.setOperation} values={operations} />
             <SelectInput    label="Maximum Number" id="max-number"currentValue={props.maxNumber}
