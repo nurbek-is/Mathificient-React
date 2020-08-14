@@ -5,7 +5,7 @@ function PlayButton() {
     return (
        <fragment>
         <br></br>
-        <Link className="btn btn-primary" to="/play">Play!</Link>
+        <Link className="btn btn-primary form-control" to="/play">Play!</Link>
         </fragment>
     )
 }
