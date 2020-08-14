@@ -1,6 +1,7 @@
 import React from 'react'
 
 function Game(props) {
+
 return (
     <div>
     Operation is <strong>{props.operation}</strong><br />

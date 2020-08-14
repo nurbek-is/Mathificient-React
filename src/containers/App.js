@@ -12,7 +12,7 @@ function App() {
   const [operation,setOperation]=useState('+');
   const [maxNumber, setMaxNumber]=useState(10)
   return (
-    <div className="App">
+    <div style={{color:'blue',backgroundColor:'orange'}} className="App">
       <Header />
     
       <Route exact path='/' component = {()=>
