@@ -7,7 +7,9 @@ import ClearButton from './ClearButton';
 import './Game.css';	
 
 function Game(props) {
-
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+const numberButtons = numbers.map((number)=>
+<NumberButton value={number} key={number} />)
 return (
     <div>
     Operation is <strong>{props.operation}</strong><br />
@@ -26,16 +28,7 @@ return (
   </div>
   <div className="row" id="buttons">
     <div className="col">
-      <NumberButton value="1" />
-      <NumberButton value="2" />
-      <NumberButton value="3" />
-      <NumberButton value="4" />
-      <NumberButton value="5" />
-      <NumberButton value="6" />
-      <NumberButton value="7" />
-      <NumberButton value="8" />
-      <NumberButton value="9" />
-      <NumberButton value="0" />
+      {numberButtons}
       <ClearButton />
     </div>
   </div>
