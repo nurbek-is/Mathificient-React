@@ -13,13 +13,13 @@ function Game({operation,maxNumber}) {
   const [userAnswer, setUserAnswer] = useState('');
   const [score, setScore] = useState(0);
   const [answered,setAnswered] =  useState(false);
-
+  
   const question = operands.num1 + " " + operation + " " + operands.num2;
-
+  
   function appendToAnswer(num) {
     setUserAnswer(String(Number(userAnswer + num)));
   }
-
+  
   function getRandNumbers(operator, low, high) {
     let num1 = randInt(low, high);
     let num2 = randInt(low, high);
@@ -45,36 +45,40 @@ function Game({operation,maxNumber}) {
       case '+':
         correctAnswer = operands.num1 + operands.num2;
         break;
-      case '-':
-        correctAnswer = operands.num1 - operands.num2;
-        break;
-      case 'x':
-        correctAnswer = operands.num1 * operands.num2;
-        break;
-      default: // division
-        correctAnswer = operands.num1 / operands.num2;
-    }
-    return (parseInt(userAnswer) === correctAnswer);
-  }
-  if(!answered && checkAnswer(userAnswer)) {
-    setAnswered(true)
-    setScore(score + 1)
-    newQuestion()
-  }
-
-  function newQuestion() {
-    setUserAnswer('');
-    setAnswered(false);
-    randNums = getRandNumbers(operation, 0,maxNumber);
-    setOperands(randNums)
-  }
-
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-const numberButtons = numbers.map((number)=>
+        case '-':
+          correctAnswer = operands.num1 - operands.num2;
+          break;
+          case 'x':
+            correctAnswer = operands.num1 * operands.num2;
+            break;
+            default: // division
+            correctAnswer = operands.num1 / operands.num2;
+          }
+          return (parseInt(userAnswer) === correctAnswer);
+        }
+        if(!answered && checkAnswer(userAnswer)) {
+          setAnswered(true);
+          setScore(score + 1);
+          setTimeout(newQuestion,300);
+        }
+        
+        function newQuestion() {
+          setUserAnswer('');
+          setAnswered(false);
+          randNums = getRandNumbers(operation, 0,maxNumber);
+          setOperands(randNums)
+        }
+        
+        const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+        const numberButtons = numbers.map((number)=>
 <NumberButton value={number} key={number} 
 handleClick={appendToAnswer}/>)
+
+const equationClass = answered ? 'row my-2 text-primary fade'
+: 'row my-2 text-secondary';
+
 return (
-    <main className="text-center" id="game-container">
+  <main className="text-center" id="game-container">
   <div className="row border-bottom" style={{fontSize:"1.5em"}}>
     <div className="col px-3 text-left">
       <Score score={score}/>
@@ -83,7 +87,7 @@ return (
       <Timer timeLeft="60" />
     </div>
   </div>
-  <div className="row text-secondary my-2" id="equation">
+  <div className={equationClass} id="equation">
     <Equation question={question} answer={userAnswer} />
   </div>
   <div className="row" id="buttons">
