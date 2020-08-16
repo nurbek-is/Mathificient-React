@@ -1,19 +1,47 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Score from './Score';	
 import Timer from './Timer';	
 import Equation from './Equation';	
 import NumberButton from './NumberButton';	
 import ClearButton from './ClearButton';
 import './Game.css';	
+import {randInt} from '../helpers/helpers';
 
-function Game(props) {
+function Game({operation,maxNumber}) {
+  let randNums = getRandNumbers(operation, 0, maxNumber);
+  const [operands, setOperands] = useState(randNums);
+  const [userAnswer, setUserAnswer] = useState('');
+
+  const question = operands.num1 + " " + operation + " " + operands.num2;
+
+  function appendToAnswer(num) {
+    setUserAnswer(String(Number(userAnswer + num)));
+  }
+
+
+  function getRandNumbers(operator, low, high) {
+    let num1 = randInt(low, high);
+    let num2 = randInt(low, high);
+    const numHigh = Math.max(num1, num2);
+    const numLow = Math.min(num1, num2);
+    if(operator === '-') { // Make sure higher num comes first
+      num1 = numHigh;
+      num2 = numLow;
+    }
+    if(operator === '/') {
+      if (num2 === 0) { // No division by zero
+        num2 = randInt(1, high);
+      }
+      num1 = (num1 * num2); // product
+    }
+    return {num1, num2};
+  }
+  
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 const numberButtons = numbers.map((number)=>
-<NumberButton value={number} key={number} />)
+<NumberButton value={number} key={number} 
+handleClick={appendToAnswer}/>)
 return (
-    <div>
-    Operation is <strong>{props.operation}</strong><br />
-    Maximum number is <strong>{props.maxNumber}</strong>.
     <main className="text-center" id="game-container">
   <div className="row border-bottom" style={{fontSize:"1.5em"}}>
     <div className="col px-3 text-left">
@@ -24,16 +52,16 @@ return (
     </div>
   </div>
   <div className="row text-secondary my-2" id="equation">
-    <Equation question="1 + 1" answer="2" />
+    <Equation question={question} answer={userAnswer} />
   </div>
   <div className="row" id="buttons">
     <div className="col">
       {numberButtons}
-      <ClearButton />
+      <ClearButton handleClick={setUserAnswer}/>
     </div>
   </div>
 </main>
-    </div>
+
     )
 }
 export default Game;
