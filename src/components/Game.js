@@ -11,13 +11,13 @@ function Game({operation,maxNumber}) {
   let randNums = getRandNumbers(operation, 0, maxNumber);
   const [operands, setOperands] = useState(randNums);
   const [userAnswer, setUserAnswer] = useState('');
+  const [score, setScore] = useState(0);
 
   const question = operands.num1 + " " + operation + " " + operands.num2;
 
   function appendToAnswer(num) {
     setUserAnswer(String(Number(userAnswer + num)));
   }
-
 
   function getRandNumbers(operator, low, high) {
     let num1 = randInt(low, high);
@@ -37,6 +37,27 @@ function Game({operation,maxNumber}) {
     return {num1, num2};
   }
   
+  function checkAnswer ()  {
+    if (isNaN(userAnswer)) return false;//User hasn't answered
+    let correctAnswer;
+    switch (operation) {
+      case "+":
+        correctAnswer = operands.num1 + operands.num2;
+        break;
+      case '-':
+        correctAnswer=operands.num1 - operands.num2;
+        break;
+      case 'x':
+        correctAnswer = operands.num1 - operands.num2;
+        break;
+        default: //division
+        correctAnswer = operands.num1 / operands.num2
+    }
+    return (parseInt(userAnswer) === correctAnswer);
+  }
+  if(checkAnswer(userAnswer)) {
+    setScore(score + 1)
+  }
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 const numberButtons = numbers.map((number)=>
 <NumberButton value={number} key={number} 
@@ -45,7 +66,7 @@ return (
     <main className="text-center" id="game-container">
   <div className="row border-bottom" style={{fontSize:"1.5em"}}>
     <div className="col px-3 text-left">
-      <Score score="0" />
+      <Score score={score}/>
     </div>
     <div  className="col px-3 text-right">
       <Timer timeLeft="60" />
