@@ -15,7 +15,7 @@ function Game({operation,maxNumber}) {
   const question = operands.num1 + " " + operation + " " + operands.num2;
 
   function appendToAnswer(num) {
-    setUserAnswer(userAnswer + num);
+    setUserAnswer(String(Number(userAnswer + num)));
   }
 
 
@@ -57,7 +57,7 @@ return (
   <div className="row" id="buttons">
     <div className="col">
       {numberButtons}
-      <ClearButton />
+      <ClearButton handleClick={setUserAnswer}/>
     </div>
   </div>
 </main>
