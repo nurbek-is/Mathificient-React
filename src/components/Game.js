@@ -12,6 +12,8 @@ function Game({operation,maxNumber}) {
   const [operands, setOperands] = useState(randNums);
   const [userAnswer, setUserAnswer] = useState('');
   const [score, setScore] = useState(0);
+  const gameLength = 60;
+  const [timeLeft, setTimeLeft] = useState(gameLength);
   const [answered,setAnswered] =  useState(false);
   
   const question = operands.num1 + " " + operation + " " + operands.num2;
@@ -84,8 +86,8 @@ return (
       <Score score={score}/>
     </div>
     <div  className="col px-3 text-right">
-      <Timer timeLeft="60" />
-    </div>
+      <Timer timeLeft={timeLeft} setTimeLeft={setTimeLeft}/>
+    </div>2
   </div>
   <div className={equationClass} id="equation">
     <Equation question={question} answer={userAnswer} />

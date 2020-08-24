@@ -10,7 +10,7 @@ import {Route} from 'react-router-dom';
 
 function App() {
   const [operation,setOperation]=useState('+');
-  const [maxNumber, setMaxNumber]=useState(10)
+  const [maxNumber, setMaxNumber] = useState(10)
   return (
     <div style={{color:'blue',backgroundColor:'orange'}} className="App">
       <Header />
