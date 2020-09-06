@@ -10,6 +10,6 @@ if(props.timeLeft>0) {
 return (
 <strong>Time: {props.timeLeft}</strong>
     )
-}
+}   
 
 export default Timer 

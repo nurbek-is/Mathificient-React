@@ -7,6 +7,7 @@ import ClearButton from './ClearButton';
 import './Game.css';	
 import {randInt} from '../helpers/helpers';
 import {Link} from 'react-router-dom';
+import Keyboard from './Keyboard';
 
 function Game({operation,maxNumber}) {
   let randNums = getRandNumbers(operation, 0, maxNumber);
@@ -111,7 +112,7 @@ return (
     <div className="col px-3 text-left">
       <Score score={score}/>
     </div>
-    <div  className="col px-3 text-right">
+    <div  className="col px-3 text-right">  
       <Timer timeLeft={timeLeft} setTimeLeft={setTimeLeft}/>
     </div>
   </div>
@@ -124,6 +125,7 @@ return (
       <ClearButton handleClick={setUserAnswer}/>
     </div>
   </div>
+  <Keyboard setUserAnswer={setUserAnswer} />
 </main>
 
     )
